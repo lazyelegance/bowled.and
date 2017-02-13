@@ -52,7 +52,6 @@
                     android:textAlignment="textStart" />
 
                 <TextView
-                    android:text="309/4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_hometeam_score"
@@ -84,7 +83,6 @@
                     android:textAlignment="textStart" />
 
                 <TextView
-                    android:text="90/9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_awayteam_score"

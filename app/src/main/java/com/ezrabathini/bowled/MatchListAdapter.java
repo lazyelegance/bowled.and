@@ -60,8 +60,10 @@ public class MatchListAdapter extends RecyclerView.Adapter<MatchListAdapter.Matc
 
         matchListAdapterViewHolder.mHometeamName.setText(hometeamName);
         matchListAdapterViewHolder.mAwayteamName.setText(awayteamName);
-        matchListAdapterViewHolder.mMatchStatus.setText(match.matchStatus);
+        matchListAdapterViewHolder.mMatchStatus.setText(match.matchSummary); // TODO: 14/02/17 status, not summary?
         matchListAdapterViewHolder.mSeriesName.setText(match.seriesName);
+        matchListAdapterViewHolder.mHometeamScore.setText(match.hometeamScore);
+        matchListAdapterViewHolder.mAwayteamScore.setText(match.awayteamScore);
     }
 
     @Override
