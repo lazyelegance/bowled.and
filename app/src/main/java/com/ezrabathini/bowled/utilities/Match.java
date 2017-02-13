@@ -57,8 +57,8 @@ public class Match {
 
         try {
             Integer matchId = matchObject.getInt("id");
-            String matchStatus = matchObject.getString("status");
-            String matchName = matchObject.getString("name");
+            String matchStatus = matchObject.getString("status").toUpperCase();
+            String matchName = matchObject.getString("name").toUpperCase();
             String matchType = matchObject.getString("cmsMatchType");
 
             JSONObject homeTeamObject = matchObject.getJSONObject("homeTeam");
@@ -71,7 +71,7 @@ public class Match {
             JSONObject seriesObject = matchObject.getJSONObject("series");
 
             Integer seriesId = seriesObject.getInt("id");
-            String seriesName = seriesObject.getString("name");
+            String seriesName = seriesObject.getString("name").toUpperCase();
 
             match = new Match(matchId, seriesId, matchStatus, homeTeam, awayTeam);
             match.seriesName = seriesName;
