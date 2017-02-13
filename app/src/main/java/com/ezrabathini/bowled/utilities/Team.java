@@ -28,9 +28,9 @@ public class Team {
 
         try {
 
-            String name = teamObject.getString("name");
+            String name = teamObject.getString("name").toUpperCase();
             Boolean isBatting = teamObject.getBoolean("isBatting");
-            String shortName = teamObject.getString("shortName");
+            String shortName = teamObject.getString("shortName").toUpperCase();
             Integer teamId = teamObject.getInt("id");
 
             team = new Team(teamId, name);
