@@ -28,12 +28,20 @@ public class Team {
 
         try {
 
-            String name = teamObject.getString("name").toUpperCase();
+            String name = teamObject.getString("name");
+            if (name.endsWith("Men")) {
+               name = name.replace(" Men", "");
+            }else if (name.endsWith("WBBL")) {
+                name = name.replace("WBBL", "Women");
+            } else if (name.endsWith("BBL")) {
+                name = name.replace(" BBL", "");
+            }
+
             Boolean isBatting = teamObject.getBoolean("isBatting");
             String shortName = teamObject.getString("shortName").toUpperCase();
             Integer teamId = teamObject.getInt("id");
 
-            team = new Team(teamId, name);
+            team = new Team(teamId, name.toUpperCase());
             team.isBatting = isBatting;
             team.shortName = shortName;
 
