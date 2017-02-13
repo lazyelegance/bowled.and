@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class MatchUtils {
     public static ArrayList<Match> getSimpleMatchListFromJson(Context context, String matchesJsonStr) throws JSONException {
         ArrayList<Match> parsedMatchData;
-
+        // TODO: 14/02/17 check failure condition 
+        
         JSONObject resultsJson = new JSONObject(matchesJsonStr);
         JSONObject matchesJson = resultsJson.getJSONObject("matchList");
         JSONArray matchesArray = matchesJson.getJSONArray("matches");
@@ -30,4 +31,6 @@ public class MatchUtils {
         Log.d("DATA", "getSimpleMatchListFromJson: " + parsedMatchData);
         return parsedMatchData;
     }
+
+    // TODO: 14/02/17 other methods to handle matchdetails, scorecard etc 
 }
