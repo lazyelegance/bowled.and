@@ -65,7 +65,7 @@ public class Match {
 
             String matchName = matchObject.getString("name").toUpperCase();
             String matchType = matchObject.getString("cmsMatchType");
-            String matchSummary = matchObject.getString("matchSummaryText");
+            String matchSummary = matchObject.getString("matchSummaryText").toUpperCase();
 
             JSONObject homeTeamObject = matchObject.getJSONObject("homeTeam");
             JSONObject awayTeamObject = matchObject.getJSONObject("awayTeam");
