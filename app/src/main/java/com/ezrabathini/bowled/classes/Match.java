@@ -1,11 +1,17 @@
-package com.ezrabathini.bowled.utilities;
+package com.ezrabathini.bowled.classes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
+
+import com.ezrabathini.bowled.utilities.MatchStatus;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by ezra on 13/02/17.
@@ -13,7 +19,7 @@ import java.util.ArrayList;
 
 
 
-public class Match {
+public class Match implements Parcelable {
     public Integer matchId;
     public Integer seriesId;
     public String seriesName;
@@ -65,7 +71,7 @@ public class Match {
 
             String matchName = matchObject.getString("name").toUpperCase();
             String matchType = matchObject.getString("cmsMatchType");
-            String matchSummary = matchObject.getString("matchSummaryText");
+            String matchSummary = matchObject.getString("matchSummaryText").toUpperCase();
 
             JSONObject homeTeamObject = matchObject.getJSONObject("homeTeam");
             JSONObject awayTeamObject = matchObject.getJSONObject("awayTeam");
@@ -126,5 +132,59 @@ public class Match {
         return match;
     }
 
+    private Match(Parcel in) {
+        String[] stringArray = new String[7];
+        int[] intArray = new int[4];
 
+        in.readStringArray(stringArray);
+        in.readIntArray(intArray);
+
+        // FIXME: 15/02/17 test
+        this.seriesName = stringArray[0];
+        this.matchId = intArray[0];
+        this.seriesId = intArray[1];
+
+        this.homeTeam = new Team(intArray[2], stringArray[2]);
+        this.awayTeam = new Team(intArray[3], stringArray[3]);
+        this.matchSummary = stringArray[1];
+        this.hometeamScore = stringArray[4];
+        this.awayteamScore = stringArray[5];
+
+        switch (stringArray[6]) {
+            case "LIVE":
+                this.matchStatus = MatchStatus.LIVE;
+            case "COMPLETED":
+                this.matchStatus = MatchStatus.COMPLETED;
+            case "UPCOMING":
+                this.matchStatus = MatchStatus.UPCOMING;
+            case "NONE":
+                this.matchStatus = MatchStatus.NONE;
+        }
+    }
+
+    public static final Parcelable.Creator<Match> CREATOR = new Creator<Match>() {
+        @Override
+        public Match createFromParcel(Parcel source) {
+            return new Match(source);
+        }
+
+        @Override
+        public Match[] newArray(int size) {
+            return new Match[0];
+        }
+    };
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[] {seriesName, matchSummary, homeTeam.name, awayTeam.name, hometeamScore, awayteamScore, matchStatus.toString()});
+        dest.writeIntArray(new int[] {matchId, seriesId, homeTeam.teamId, awayTeam.teamId});
+//        dest.writeBooleanArray(new boolean[] {isMultiday, isWomensMatch, homeTeam.isBatting, awayTeam.isBatting});
+    }
 }

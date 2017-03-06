@@ -18,12 +18,27 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
-
-    final static String MATCHES_URL = StaticData.BW_MATCHES_URL;
     final static String API_KEY = StaticData.BW_API_KEY;
 
-    public static URL buildUrl() {
-        Uri builtUri = Uri.parse(MATCHES_URL).buildUpon().build();
+    public static URL buildUrl(String urlString) {
+        Uri builtUri = Uri.parse(urlString).buildUpon().build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static URL buildUrl(String urlString, int matchid, int seriesid) {
+        Uri builtUri = Uri.parse(urlString)
+                .buildUpon()
+                .appendQueryParameter("matchid", ""+matchid)
+                .appendQueryParameter("seriesid", ""+seriesid)
+                .build();
+
         URL url = null;
         try {
             url = new URL(builtUri.toString());

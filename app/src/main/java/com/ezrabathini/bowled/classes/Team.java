@@ -1,4 +1,4 @@
-package com.ezrabathini.bowled.utilities;
+package com.ezrabathini.bowled.classes;
 
 import org.json.JSONObject;
 
@@ -19,6 +19,15 @@ public class Team {
         this.shortName = name;
         this.teamId = teamId;
         this.isBatting = false;
+        this.logoURL = "";
+        this.teamColor = "#ffffff";
+    }
+
+    public Team(Integer teamId, String name, Boolean isBatting) {
+        this.name = name;
+        this.shortName = name;
+        this.teamId = teamId;
+        this.isBatting = isBatting;
         this.logoURL = "";
         this.teamColor = "#ffffff";
     }

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ezrabathini.bowled.utilities.Match;
+import com.ezrabathini.bowled.classes.Match;
 
 import java.util.ArrayList;
 
@@ -17,11 +17,15 @@ import java.util.ArrayList;
 
 public class MatchListAdapter extends RecyclerView.Adapter<MatchListAdapter.MatchListAdapterViewHolder> {
     private ArrayList mMatchData;
+
+
+
     public MatchListAdapter() {
 
     }
 
     public class MatchListAdapterViewHolder extends RecyclerView.ViewHolder {
+
         public final TextView mHometeamName;
         public final TextView mAwayteamName;
         public final TextView mHometeamScore;
@@ -30,8 +34,10 @@ public class MatchListAdapter extends RecyclerView.Adapter<MatchListAdapter.Matc
         public final TextView mSeriesName;
         public final TextView mMatchStatus;
 
-        public MatchListAdapterViewHolder(View view) {
+
+        public MatchListAdapterViewHolder(final View view) {
             super(view);
+
             mHometeamName = (TextView) view.findViewById(R.id.tv_hometeam_name);
             mAwayteamName = (TextView) view.findViewById(R.id.tv_awayteam_name);
             mHometeamScore = (TextView) view.findViewById(R.id.tv_hometeam_score);
@@ -53,8 +59,8 @@ public class MatchListAdapter extends RecyclerView.Adapter<MatchListAdapter.Matc
     }
 
     @Override
-    public void onBindViewHolder(MatchListAdapterViewHolder matchListAdapterViewHolder, int position) {
-        Match match = (Match) mMatchData.get(position);
+    public void onBindViewHolder(final MatchListAdapterViewHolder matchListAdapterViewHolder, int position) {
+        final Match match = (Match) mMatchData.get(position);
         String hometeamName = match.homeTeam.name;
         String awayteamName = match.awayTeam.name;
 
