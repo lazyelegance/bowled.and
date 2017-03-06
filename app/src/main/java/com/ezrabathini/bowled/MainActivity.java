@@ -1,6 +1,7 @@
 package com.ezrabathini.bowled;
 
-import android.os.AsyncTask;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -12,12 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.ezrabathini.bowled.utilities.Match;
-import com.ezrabathini.bowled.utilities.MatchUtils;
+import com.ezrabathini.bowled.data.StaticData;
+import com.ezrabathini.bowled.classes.Match;
+import com.ezrabathini.bowled.utilities.BowledUtils;
 import com.ezrabathini.bowled.utilities.NetworkUtils;
+import com.ezrabathini.bowled.utilities.RecyclerItemClickListener;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList> {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private RecyclerView mRecyclerView;
     private MatchListAdapter mMatchListAdapter;
     private ProgressBar mLoadingIndicator;
-    private static final int BOWLED_MACTHES_LOADER = 22;
+    private static final int BOWLED_MATCHES_LOADER = 22;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecyclerView.setAdapter(mMatchListAdapter);
 
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
-        getResources().getString(R.string.bowledServiceMatchesURL);
-        getSupportLoaderManager().initLoader(BOWLED_MACTHES_LOADER, null, this);
+        getSupportLoaderManager().initLoader(BOWLED_MATCHES_LOADER, null, this);
         loadMatchData();
 
     }
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void loadMatchData() {
         Bundle queryBundle = new Bundle();
         LoaderManager loaderManager = getSupportLoaderManager();
-        loaderManager.restartLoader(BOWLED_MACTHES_LOADER, queryBundle, this);
+        loaderManager.restartLoader(BOWLED_MATCHES_LOADER, queryBundle, this);
     }
 
     @Override
@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public ArrayList loadInBackground() {
                 try {
 
-                    String jsonMatchResponse = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl());
-                    ArrayList<Match> simpleJsonMatchData = MatchUtils.getSimpleMatchListFromJson(MainActivity.this, jsonMatchResponse);
+                    String jsonMatchResponse = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl(StaticData.BW_MATCHES_URL));
+                    ArrayList<Match> simpleJsonMatchData = BowledUtils.getMatchListFromJson(MainActivity.this, jsonMatchResponse);
                     return simpleJsonMatchData;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -86,9 +86,29 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList> loader, ArrayList data) {
+    public void onLoadFinished(Loader<ArrayList> loader, final ArrayList data) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         mMatchListAdapter.setMatchData(data);
+
+        final Context context = MainActivity.this;
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(context, MatchDetail.class);
+                Match match = (Match) data.get(position);
+                Log.d("DUCK", "onItemClick: " + match.seriesName);
+
+                intent.putExtra("matchTEST", match);
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
     }
 
     @Override
