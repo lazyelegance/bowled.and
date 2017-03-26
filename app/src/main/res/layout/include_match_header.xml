@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@color/white">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="series name"
+        android:id="@+id/include_match_header_series"
+        android:fontFamily="monospace"
+        android:textSize="10sp"
+        android:textColor="@color/mainColor"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/include_match_header_series"
+        android:id="@+id/include_match_header_teamOne">
+        <TextView
+            android:text="teamOneName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/include_match_header_teamOneName"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:textColor="@color/mainColor"
+            android:textAlignment="textStart"
+            android:textStyle="normal|bold"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/include_match_header_teamOneScore"
+            android:text="teamOneScore"
+            android:fontFamily="sans-serif"
+            android:textSize="15sp"
+            android:textColor="@color/mainColor"
+            android:textAlignment="textEnd"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/include_match_header_teamTwo"
+        android:layout_below="@id/include_match_header_teamOne">
+        <TextView
+            android:text="teamTwoName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/include_match_header_teamTwoName"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:textColor="@color/mainColor"
+            android:textAlignment="textStart"
+            android:textStyle="normal|bold"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/include_match_header_teamTwoScore"
+            android:text="teamTwoScore"
+            android:fontFamily="sans-serif"
+            android:textSize="15sp"
+            android:textColor="@color/mainColor"
+            android:textAlignment="textEnd"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="match status"
+        android:id="@+id/include_match_header_status"
+        android:layout_below="@id/include_match_header_teamTwo"
+        android:fontFamily="monospace"
+        android:textSize="10sp"
+        android:textColor="@color/mainColor"
+        android:layout_marginBottom="8dp"/>
+</RelativeLayout>

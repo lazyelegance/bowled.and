@@ -1,144 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_match_detail"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="5dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="5dp"
-    tools:context="com.ezrabathini.bowled.MatchDetail"
-    android:background="@color/mainColor">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <include layout="@layout/include_match_header"/>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/background_light">
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:id="@+id/tv_md_series_name"
-            android:layout_weight="1"
-            android:fontFamily="monospace"
-            android:textSize="10sp"
-            android:textColor="@color/mainColor"
-            android:textAlignment="viewStart"
-            android:layout_margin="5dp"
-            android:paddingStart="5dp"
-            android:paddingLeft="5dp"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="16dp"
-            tools:layout_editor_absoluteX="16dp" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:paddingEnd="5dp"
-            android:paddingStart="5dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp">
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_md_awayteam_name"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:textSize="16sp"
-                android:textColor="@color/mainColor"
-                android:textAlignment="textStart"
-                android:textStyle="normal|bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_md_awayteam_score"
-                android:layout_weight="1.03"
-                android:fontFamily="sans-serif"
-                android:textSize="15sp"
-                android:textColor="@color/mainColor"
-                android:textAlignment="textEnd" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:paddingEnd="5dp"
-            android:paddingStart="5dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp">
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_md_hometeam_name"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:textSize="16sp"
-                android:textColor="@color/mainColor"
-                android:textAlignment="textStart"
-                android:textStyle="normal|bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_md_hometeam_score"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:textSize="15sp"
-                android:textColor="@color/mainColor"
-                android:textAlignment="textEnd" />
-
-        </LinearLayout>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_md_match_status"
-            android:layout_weight="1"
-            android:fontFamily="monospace"
-            android:textSize="10sp"
-            android:textColor="@color/mainColor"
-            android:textAlignment="viewStart"
-            android:layout_margin="5dp"
-            android:paddingStart="5dp"
-            android:paddingLeft="5dp"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <android.support.v7.widget.RecyclerView
+        android:padding="8dp">
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_sc_batting"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             />
-            <ProgressBar
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:id="@+id/pb_sc_batting"
-                android:layout_gravity="center"
-                android:visibility="invisible"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+    </FrameLayout>
 
-        </FrameLayout>
-    </LinearLayout>
 
-</RelativeLayout>
+
+</LinearLayout>

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class MatchDetail extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList> {
 
+    private static String tag;
+
     private TextView mHometeamName;
     private TextView mAwayteamName;
     private TextView mHometeamScore;
@@ -38,12 +40,14 @@ public class MatchDetail extends AppCompatActivity implements LoaderManager.Load
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_detail);
 
-        mHometeamName = (TextView) findViewById(R.id.tv_md_hometeam_name);
-        mAwayteamName = (TextView) findViewById(R.id.tv_md_awayteam_name);
-        mHometeamScore = (TextView) findViewById(R.id.tv_md_hometeam_score);
-        mAwayteamScore = (TextView) findViewById(R.id.tv_md_awayteam_score);
-        mSeriesName = (TextView) findViewById(R.id.tv_md_series_name);
-        mMatchStatus = (TextView) findViewById(R.id.tv_md_match_status);
+        tag = getClass().getSimpleName();
+
+        mHometeamName = (TextView) findViewById(R.id.include_match_header_teamOneName);
+        mAwayteamName = (TextView) findViewById(R.id.include_match_header_teamTwoName);
+        mHometeamScore = (TextView) findViewById(R.id.include_match_header_teamOneScore);
+        mAwayteamScore = (TextView) findViewById(R.id.include_match_header_teamTwoScore);
+        mSeriesName = (TextView) findViewById(R.id.include_match_header_series);
+        mMatchStatus = (TextView) findViewById(R.id.include_match_header_status);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_sc_batting);
 
         getSupportLoaderManager().initLoader(BOWLED_SCORECARD_LOADER, null, this);
@@ -56,9 +60,6 @@ public class MatchDetail extends AppCompatActivity implements LoaderManager.Load
         if (intentPassed.hasExtra("matchTEST")) {
             match = (Match) intentPassed.getParcelableExtra("matchTEST");
             if (match != null) {
-                Log.i("INFO", "onCreate: " + match.matchId);
-                Log.i("INFO", "onCreate: " + match.seriesId);
-                Log.i("INFO", "onCreate: " + match.matchSummary);
 
                 mHometeamName.setText(match.homeTeam.name);
                 mAwayteamName.setText(match.awayTeam.name);
@@ -84,7 +85,7 @@ public class MatchDetail extends AppCompatActivity implements LoaderManager.Load
             @Override
             protected void onStartLoading() {
                 if (args == null) {
-                    Log.d("ERRRRR", "onStartLoading: args are null (!?)");
+                    Log.d(tag, "onStartLoading: args are null (!?)");
                     return;
                 }
 
@@ -95,8 +96,8 @@ public class MatchDetail extends AppCompatActivity implements LoaderManager.Load
             @Override
             public ArrayList loadInBackground() {
                 try {
-                    String jsonScorecardResponse = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl(StaticData.BW_SCORECARD_URL,40329, 1849));
-                    Log.i("INFO", "loadInBackground: " + BowledUtils.getScorecardFromJson(MatchDetail.this, jsonScorecardResponse));
+                    String jsonScorecardResponse = NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl(StaticData.BW_SCORECARD_URL, match.matchId, match.seriesId));
+                    Log.i(tag, "loadInBackground: " + BowledUtils.getScorecardFromJson(MatchDetail.this, jsonScorecardResponse));
 //                    return simpleJsonScorecard;
                     return null;
                 } catch (Exception e) {
