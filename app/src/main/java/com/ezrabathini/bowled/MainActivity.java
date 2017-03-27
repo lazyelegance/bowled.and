@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_matches);
+        mRecyclerView = (RecyclerView) findViewById(R.id.activity_main_recyclerView);
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mRecyclerView.setAdapter(mMatchListAdapter);
 
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+        mLoadingIndicator = (ProgressBar) findViewById(R.id.activity_main_progressBar);
         getSupportLoaderManager().initLoader(BOWLED_MATCHES_LOADER, null, this);
         loadMatchData();
 
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             protected void onStartLoading() {
                 if (args == null) {
-                    Log.d("ERRRRR", "onStartLoading: args are null (!?)");
                     return;
                 }
 
@@ -97,10 +96,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, MatchDetail.class);
                 Match match = (Match) data.get(position);
-                Log.d("DUCK", "onItemClick: " + match.seriesName);
-
                 intent.putExtra("matchTEST", match);
-
                 startActivity(intent);
             }
 

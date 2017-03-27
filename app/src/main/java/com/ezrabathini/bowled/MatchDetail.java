@@ -48,7 +48,7 @@ public class MatchDetail extends AppCompatActivity implements LoaderManager.Load
         mAwayteamScore = (TextView) findViewById(R.id.include_match_header_teamTwoScore);
         mSeriesName = (TextView) findViewById(R.id.include_match_header_series);
         mMatchStatus = (TextView) findViewById(R.id.include_match_header_status);
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_sc_batting);
+        mLoadingIndicator = (ProgressBar) findViewById(R.id.activty_match_detail_progressBar);
 
         getSupportLoaderManager().initLoader(BOWLED_SCORECARD_LOADER, null, this);
         Bundle queryBundle = new Bundle();
